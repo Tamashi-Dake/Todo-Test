@@ -13,7 +13,7 @@ export default function App() {
         ...todo,
         { id: crypto.randomUUID(), title: input, completed: false },
       ]);
-      setInput(''); //chú ý cú pháp
+      setInput(''); //chú ý syntax
     }
   }
   function handleToggleTodoCompleted(id) {
@@ -21,6 +21,11 @@ export default function App() {
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
     setToDo(updatedTodos);
+  }
+  function deleteToDo(id) {
+    setToDo(todo =>{
+      return todo.filter(todo => todo.id !== id)
+    });
   }
   return (
     <>
@@ -34,7 +39,7 @@ export default function App() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Add something to do</button>
       </form>
       <div>
         <h1>To do list</h1>
@@ -48,6 +53,7 @@ export default function App() {
                   onChange={() => handleToggleTodoCompleted(todo.id)}
                 />
                 {todo.title}
+                <button onClick={()=> deleteToDo(todo.id)}>Delete</button>
               </li>
             );
           })}
