@@ -6,3 +6,6 @@ p {
 h2{
   background-color: aquamarine;
 }
+.completed span {
+  text-decoration: line-through;
+}
